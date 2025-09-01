@@ -1,4 +1,5 @@
+from django.shortcuts import render
 from django.http import HttpResponse
 
 def dashboard_home(request):
-    return HttpResponse("<h2>Dashboard Home</h2><p>Analytics and reports live here.</p>")
+    return HttpResponse("<h1>Welcome to Gemstone Coding Academy</h1><p>This is the homepage.</p>")
