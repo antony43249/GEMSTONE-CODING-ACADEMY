@@ -53,6 +53,8 @@ INSTALLED_APPS = [
 
 # Custom User
 AUTH_USER_MODEL = "users.User"
+STATIC_URL = os.path.join(BASE_DIR, "static/")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "staticfiles")]
 
 
 MIDDLEWARE = [
