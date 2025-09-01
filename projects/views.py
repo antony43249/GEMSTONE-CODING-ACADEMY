@@ -1,3 +1,4 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 
-# Create your views here.
+def projects_home(request):
+    return HttpResponse("<h2>Projects App Home</h2><p>Student project submissions live here.</p>")
