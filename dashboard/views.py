@@ -1,7 +1,4 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 
-
-# Create your views here.
-def dashboard(request):
-        return HttpResponse("<h2>Users App Home</e.</p>")
+def dashboard_home(request):
+    return HttpResponse("<h2>Dashboard Home</h2><p>Analytics and reports live here.</p>")
