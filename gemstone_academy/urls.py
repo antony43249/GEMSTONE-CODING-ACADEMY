@@ -28,4 +28,3 @@ urlpatterns = [
     path('marketing/', include('marketing.urls')),
     path('dashboard/', include('dashboard.urls')),
 ]
-

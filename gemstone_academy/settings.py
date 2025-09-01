@@ -48,20 +48,12 @@ INSTALLED_APPS = [
     'dashboard',
 
     # Third-party
-    'rest_framework',   # If you want APIs
+    #  'rest_framework',   # If you want APIs
 ]
 
 # Custom User
 AUTH_USER_MODEL = "users.User"
 
-# Static & Media
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
-
-TEMPLATES[0]['DIRS'] = [BASE_DIR / "templates"]
-
-
-]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -78,7 +70,7 @@ ROOT_URLCONF = "gemstone_academy.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

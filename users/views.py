@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
 
+
 def register_view(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
