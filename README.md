@@ -9,6 +9,7 @@ gemstone_academy/
 │
 │── users/                    # Custom user model & roles
 │   ├── migrations/
+│   ├── templates/
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
@@ -20,6 +21,7 @@ gemstone_academy/
 │
 │── courses/                  # Coding courses
 │   ├── migrations/
+│   ├── templates/
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
@@ -30,6 +32,7 @@ gemstone_academy/
 │
 │── enrollments/              # Student course enrollments
 │   ├── migrations/
+│   ├── templates
 │   ├── models.py
 │   ├── views.py
 │   ├── admin.py
@@ -54,7 +57,9 @@ gemstone_academy/
 │   ├── models.py
 │   ├── views.py
 │   ├── admin.py
-│   ├── urls.py
+│   ├── urls.py│   ├── templates/
+│   ├── templates/
+
 │
 │── dashboard/                # Admin dashboards, analytics
 │   ├── migrations/
