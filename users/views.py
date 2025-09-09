@@ -3,7 +3,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm
 
-
+def users_home(request):
+    return render(request, "users/home.html")
 
 def register_view(request):
     if request.method == "POST":
@@ -15,7 +16,7 @@ def register_view(request):
             return redirect("dashboard-home")
     else:
         form = UserRegisterForm()
-    return render(request, "users/register.html", {"form": form})
+    return render(request, "users/signup.html", {"form": form})
 
 
 def login_view(request):
@@ -34,4 +35,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "You have logged out.")
-    return redirect("login")
+    return redirect("users/login")
