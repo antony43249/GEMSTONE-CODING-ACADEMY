@@ -12,8 +12,8 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-    <img src="{% static 'images/logo.png' %}" alt="Freelancers Portfolio & Job Board" class="navbar-brand-logo">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="{% static 'image path Here' %}" alt="Image Here" class="navbar-brand-logo">
     <a class="navbar-brand">🌟 Gemstone Academy</a>
     
     <!-- Toggler button for small screens -->
@@ -36,7 +36,7 @@
       <div class="d-flex align-items-center gap-2 ms-auto">
         {% if not request.user.is_authenticated %}
           <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a>
-          <a href="{% url 'signup' %}" class="btn btn-warning">Sign Up</a>
+          <a href="{% url 'signup' %}" class="btn btn-light">Sign Up</a>
         {% else %}
           <div class="dropdown">
             <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,7 +44,7 @@
               <span>{{ request.user.username }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item text-center bg-success" href="{% url 'profile' %}">
+              <li><a class="dropdown-item text-center bg-success" href="{% url 'users' %}">
                 Profile</a>
               </li>
               <li><hr class="dropdown-divider"></li>
