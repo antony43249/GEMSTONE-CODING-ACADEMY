@@ -5,4 +5,4 @@ def courses_home(request):
     return render(request, "courses/home.html")
 
 def courses(request):
-    return render(request, "courses/courses.html")
+    return render(request, "courses.html")
