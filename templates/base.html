@@ -1,48 +1,74 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Gemstone Coding Academy</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gemstone Academy{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="{% static 'custom.css' %}">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">🌟 Gemstone Academy</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                    data-bs-target="#navbarNav" aria-controls="navbarNav" 
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/users/">Users</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/courses/">Courses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/enrollments/">Enrollments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/projects/">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/payments/">Payments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/marketing/">Marketing</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Main Container -->
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <img src="{% static 'images/logo.png' %}" alt="Freelancers Portfolio & Job Board" class="navbar-brand-logo">
+    <a class="navbar-brand">🌟 Gemstone Academy</a>
+    
+    <!-- Toggler button for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link text-white" href="{% url '/' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'users' %}">Users</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'courses' %}">Courses</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'enrollments' %}">Enrollment</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'projects' %}">Projects</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'payments' %}">Payments</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="{% url 'marketing' %}">Marketing</a></li>
+      </ul>
+      <!-- Profile/Account section aligned to top right -->
+      <div class="d-flex align-items-center gap-2 ms-auto">
+        {% if not request.user.is_authenticated %}
+          <a href="{% url 'login' %}" class="btn btn-outline-light">Login</a>
+          <a href="{% url 'signup' %}" class="btn btn-warning">Sign Up</a>
+        {% else %}
+          <div class="dropdown">
+            <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{% if request.user.profile.photo %}{{ request.user.profile.photo.url }}{% else %}{% static 'images/avatar-placeholder.png' %}{% endif %}" class="rounded-cicle me-2" alt="Profile" style="width:32px;height:32px;object-fit:cover;border-radius:20px;border:2px solid gray;">
+              <span>{{ request.user.username }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item text-center bg-success" href="{% url 'profile' %}">
+                Profile</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+                <form method="post" action="{% url 'logout' %}">
+                 {% csrf_token %}
+                 <button type="submit" class="dropdown-item text-center bg-danger">
+                  Logout
+                 </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        {% endif %}
+      </div>
     </div>
+  </nav>
 
-    <!-- Footer -->
-    <footer class="bg-secondary d-flex py-3 mt-5 border-top">
-        <p class="mb-0 text-light">© 2025 Gemstone Coding Academy|Developed by Eng.Odadi</p>
-    </footer>
+  <!-- Page Content -->
+  <div>
+    {% block content %}
+    {% endblock %}
+  </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+        </html>
