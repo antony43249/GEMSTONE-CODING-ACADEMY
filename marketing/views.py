@@ -1,5 +1,5 @@
-from django.shortcurts import render
+from django.shortcuts import render
 from django.http import HttpResponse
 
 def marketing_home(request):
-    return render(request, 'marketing/home.html')
+    return render(request, 'marketing/marketing.html')
