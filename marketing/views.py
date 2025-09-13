@@ -1,4 +1,5 @@
+from django.shortcurt import render
 from django.http import HttpResponse
 
 def marketing_home(request):
-    return HttpResponse("<h2>Marketing App Home</h2><p>Blog, events, and campaigns live here.</p>")
+    return render(request, 'marketing/home.html')
