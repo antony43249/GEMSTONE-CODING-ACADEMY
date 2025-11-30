@@ -1,10 +1,40 @@
 {% extends "base.html" %}
+
+{% block title %}Projects — Gemstone Academy{% endblock %}
+
 {% block content %}
 <div class="card shadow-sm">
     <div class="card-body">
         <h2 class="card-title">Projects</h2>
         <p class="card-text">Students can submit and showcase their coding projects.</p>
-        <a href="#" class="btn btn-outline-primary">Submit Project</a>
+
+        {% if projects %}
+            <div class="row g-3 mb-3">
+                {% for proj in projects %}
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ proj.title }}</h5>
+                                <p class="small text-muted">By {{ proj.author.username }} — {{ proj.published_at|date:"M j, Y" }}</p>
+                                <p>{{ proj.summary|default:proj.description|truncatechars:120 }}</p>
+                                <a href="{% url 'project-detail' proj.id %}" class="stretched-link"></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if project_form %}
+            <h5 class="mb-2">Submit a Project</h5>
+            <form method="post" action="{% url 'project-create' %}">
+                {% csrf_token %}
+                {{ project_form.as_p }}
+                <button class="btn btn-outline-primary">Submit Project</button>
+            </form>
+        {% else %}
+            <a href="#" class="btn btn-outline-primary">Submit Project</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

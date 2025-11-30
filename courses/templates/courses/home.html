@@ -1,11 +1,49 @@
 {% extends "base.html" %}
 
+{% block title %}Courses — Gemstone Academy{% endblock %}
+
 {% block content %}
-<div class="card shadow-sm">
-    <div class="card-body">
-        <h2 class="card-title">Courses</h2>
-        <p class="card-text">Browse and manage coding courses for kids aged 6–18.</p>
-        <a href="{% url 'courses' %}" class="btn btn-success">View All Courses</a>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <h2 class="card-title">Courses</h2>
+                <p class="card-text">Browse and manage coding courses for kids aged 6–18.</p>
+                <a href="{% url 'courses' %}" class="btn btn-success">View All Courses</a>
+            </div>
+        </div>
+
+        {% if featured_courses %}
+            <h4 class="mb-2">Featured Courses</h4>
+            <div class="list-group mb-3">
+                {% for c in featured_courses %}
+                    <a href="{% url 'detail' c.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ c.title }}</h5>
+                            <small>${{ c.fee }}</small>
+                        </div>
+                        <p class="mb-1 text-muted">{{ c.description|truncatechars:100 }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Quick Enrollment</h5>
+                {% if enroll_form %}
+                    <form method="post" action="{% url 'enrollment' %}">
+                        {% csrf_token %}
+                        {{ enroll_form.as_p }}
+                        <button class="btn btn-primary">Enroll</button>
+                    </form>
+                {% else %}
+                    <p class="text-muted">Sign in to enroll quickly.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

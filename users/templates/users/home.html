@@ -1,13 +1,22 @@
 {% extends "base.html" %}
 
+{% block title %}Users — Gemstone Academy{% endblock %}
+
 {% block content %}
 <div class="card shadow-sm">
     <div class="card-body">
         <h2 class="card-title">Users</h2>
-        <p class="card-text">Manage authentication and user profiles here.</p>
-        <a href="/users/register/" class="btn btn-success">Register</a>
-        <a href="/users/login/" class="btn btn-outline-primary">Login</a>
-        <a href="/users/profile/" class="btn btn-outline-primary">profile</a>
-        </div>
+                <p class="card-text">Manage authentication and user profiles here.</p>
+
+                {% if stats %}
+                    <div class="mb-3">
+                        <strong>Members:</strong> {{ stats.total_users }} • <strong>Students:</strong> {{ stats.students_count }}
+                    </div>
+                {% endif %}
+
+                <a href="{% url 'register' %}" class="btn btn-success">Register</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
+                <a href="{% url 'user-profile' %}" class="btn btn-outline-primary">Profile</a>
+    </div>
 </div>
 {% endblock %}

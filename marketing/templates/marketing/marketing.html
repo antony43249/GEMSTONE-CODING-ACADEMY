@@ -1,9 +1,23 @@
 {% extends "base.html" %}
 
+{% block title %}Marketing — Gemstone Academy{% endblock %}
+
 {% block content %}
-<div class="alert alert-warning shadow-sm">
-    <h2>Marketing</h2>
-    <p>Check out blog posts, events, and demo day campaigns here.</p>
-    <a href="#" class="btn btn-warning">View Campaigns</a>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title">Marketing</h2>
+        <p class="card-text">Check out blog posts, events, and demo day campaigns here.</p>
+        {% if campaigns %}
+            <ul class="list-group mb-3">
+                {% for c in campaigns %}
+                    <li class="list-group-item">
+                        <a href="{% url 'marketing-detail' c.id %}">{{ c.title }}</a>
+                        <div class="small text-muted">{{ c.date|date:"M j, Y" }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="#" class="btn btn-warning">View Campaigns</a>
+    </div>
 </div>
 {% endblock %}

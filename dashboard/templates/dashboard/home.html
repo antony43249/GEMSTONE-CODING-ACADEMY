@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 
+{% block title %}Home — Gemstone Academy{% endblock %}
+
 {% block content %}
 <div class="text-center">
-    <h2 class="mb-3">Welcome to Gemstone Coding Academy</h2>
-    <p class="lead">Creating generation empowered  and stared to operate in natural coding excellence.</p>
-    <a href="/courses/" class="btn btn-primary btn-lg">Explore Courses</a>
-</div>
+        <h2 class="mb-3">Welcome to Gemstone Coding Academy</h2>
+        <p class="lead">Empowering the next generation with practical coding skills and creativity.</p>
+        <a href="{% url 'courses-home' %}" class="btn btn-primary btn-lg">Explore Courses</a>
+
+        {% if recent_courses %}
+            <div class="mt-4">
+                <h5>Recent Courses</h5>
+                <div class="list-group">
+                    {% for c in recent_courses %}
+                        <a href="{% url 'course-detail' c.id %}" class="list-group-item list-group-item-action">{{ c.title }} — ${{ c.fee }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

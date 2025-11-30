@@ -23,26 +23,49 @@
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/users/">Users</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/courses/">Courses</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/enrollments/">Enrollments</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/projects/">Projects</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/payments/">Payments</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="/marketing/">Marketing</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'dashboard-home' %}">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'users-home' %}">Users</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'courses-home' %}">Courses</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'enrollments-home' %}">Enrollments</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'projects-home' %}">Projects</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'payments-home' %}">Payments</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="{% url 'marketing-home' %}">Marketing</a></li>
       </ul>
     </div>
   </nav>
-
-  <!-- Page Content -->
-  <div>
-    {% block content %}
-    {% endblock %}
+  
+  <!-- Flash messages -->
+  <div class="container mt-3">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
   </div>
 
-  <footer class="bg-secondary mt-auto py-3 text-center">
-          <p class="mb-0 text-light">© 2025 Gemstone Coding Academy | Developed by Eng. Odadi</p>
-  </footer>
+  <!-- Page Content -->
+  {% if user.is_authenticated and user_profile %}
+    {% if not user_profile.bio or user_profile.avatar.name == "avatars/default.png" %}
+      <div class="container mt-3">
+        <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+          <div>
+            <strong>Complete your profile</strong>
+            <div class="small text-muted">Add a bio and avatar so mentors and parents can learn about you.</div>
+          </div>
+          <div>
+            <a href="{% url 'profile-edit' %}" class="btn btn-sm btn-primary">Complete Profile</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+
+  <main class="container py-4">
+    {% block content %}{% endblock %}
+  </main>
+
+    <footer class="bg-secondary mt-auto py-3 text-center">
+      <p class="mb-0 text-light">© 2025 Gemstone Coding Academy | Developed by Eng. Odadi</p>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

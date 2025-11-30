@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }} — Gemstone Academy{% endblock %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">{{ course.title }}</h2>
+    <p class="text-muted">{{ course.get_level_display }} — {{ course.mode|capfirst }}</p>
+    <p>{{ course.description }}</p>
+    <ul class="list-inline small text-muted">
+      <li class="list-inline-item">Age: {{ course.age_group_min }}–{{ course.age_group_max }}</li>
+      <li class="list-inline-item">•</li>
+      <li class="list-inline-item">Fee: ${{ course.fee }}</li>
+    </ul>
+    <a href="{% url 'enrollment-create' %}?course={{ course.id }}" class="btn btn-success">Enroll</a>
+  </div>
+</div>
+{% endblock %}

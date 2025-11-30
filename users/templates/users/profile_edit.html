@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile — Gemstone Academy{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width:800px;">
+  <div class="card-body">
+    <h2 class="card-title">Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary">Save</button>
+      <a href="{% url 'user-profile' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}
